@@ -1,0 +1,63 @@
+---
+title: "Freshwater Mussel Pollution Exposure Report"
+author: "Yingpu Guo"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+```{r source-scripts, include=FALSE}
+# Run the project scripts in order.
+source(here::here("code", "01_load_data.R"))
+source(here::here("code", "02_clean_data.R"))
+source(here::here("code", "03_table_summary.R"))
+source(here::here("code", "04_figure_pollution.R"))
+```
+
+# Introduction
+
+Write a short introduction here about pollution exposure and freshwater mussel health.
+
+# Data
+
+Describe the dataset here. You can mention the source, what each row represents, and the main variables used in the report.
+
+```{r data-preview}
+if (exists("raw_data")) {
+  utils::head(raw_data)
+}
+```
+
+# Methods
+
+Describe the workflow here. Explain how the data were loaded, cleaned, summarized, and plotted.
+
+# Results
+
+Add your main table and figure below, then describe what they show.
+
+```{r summary-table}
+if (exists("summary_table")) {
+  knitr::kable(summary_table, caption = "Starter summary table")
+}
+```
+
+```{r exploratory-figure, fig.width=7, fig.height=5}
+if (exists("pollution_figure")) {
+  print(pollution_figure)
+}
+```
+
+# Discussion
+
+Write your interpretation here. You can also discuss limitations and next steps.

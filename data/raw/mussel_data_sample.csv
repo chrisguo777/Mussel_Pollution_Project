@@ -1,0 +1,9 @@
+site_id,pollution_ppm,health_score,species
+A1,2.1,82,Species_A
+A2,3.4,76,Species_A
+B1,1.8,88,Species_B
+B2,4.2,71,Species_B
+C1,2.9,79,Species_A
+C2,5.1,65,Species_C
+D1,3.7,74,Species_C
+D2,1.5,90,Species_B
