@@ -38,14 +38,29 @@ project-root/
 
 ## How to build the final report
 
-To build the final HTML report from the project root, run:
+This project uses `renv` to pin the R package environment used to generate the report. Before building the report on a new machine, restore the project library from the lockfile:
+
+```bash
+make install
+```
+
+This runs `renv::restore()` using the versions recorded in `renv.lock`.
+
+After the package environment has been synchronized, build the final HTML report from the project root:
 
 ```bash
 make
 ```
 
 This creates `report/final_report.html`.
+
+If you add, remove, or update R package dependencies, update the lockfile before committing:
+
+```r
+renv::snapshot()
 ```
+
+The repository now includes `renv.lock`, `.Rprofile`, and the `renv/` folder so collaborators can reproduce the same package environment.
 
 ## Scripts
 

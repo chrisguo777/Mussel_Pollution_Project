@@ -1,3 +1,6 @@
+install: renv.lock
+	Rscript --vanilla -e "renv::restore(prompt = FALSE)"
+
 all: report/final_report.html
 
 data/clean/mussel_data_clean.csv: code/02_clean_data.R data/raw/mussel_data.csv
@@ -15,4 +18,4 @@ report/final_report.html: report/final_report.Rmd code/05_render_report.R output
 clean:
 	rm -f output/tables/summary_table.csv output/figures/pollution_figure.png report/final_report.html
 
-.PHONY: all clean
+.PHONY: install all clean
