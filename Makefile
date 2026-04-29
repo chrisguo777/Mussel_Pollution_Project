@@ -1,4 +1,4 @@
-IMAGE = paaaaaxton/mussel-pollution-project
+IMAGE = paaaaaxton/mussel_pollution_project
 
 install: renv.lock
 	Rscript --vanilla -e "renv::restore(prompt = FALSE)"

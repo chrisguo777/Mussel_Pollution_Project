@@ -39,14 +39,14 @@ project-root/
 
 The pre-built Docker image is available at:
 
-**https://hub.docker.com/r/paaaaaxton/mussel-pollution-project**
+**https://hub.docker.com/r/paaaaaxton/mussel_pollution_project**
 
 ## How to Build the Docker Image
 
 Clone the repository and build the image from the project root:
 
 ```bash
-docker build -t paaaaaxton/mussel-pollution-project .
+docker build -t paaaaaxton/mussel_pollution_project .
 ```
 
 ## How to Generate the Report Using Docker
@@ -62,7 +62,7 @@ make docker_run
 This runs:
 
 ```bash
-docker run --rm -v $(PWD)/report:/project/report paaaaaxton/mussel-pollution-project
+docker run --rm -v $(PWD)/report:/project/report paaaaaxton/mussel_pollution_project
 ```
 
 **Windows (git bash):**
@@ -74,7 +74,7 @@ make docker_run_windows
 This runs:
 
 ```bash
-docker run --rm -v /$(PWD)/report:/project/report paaaaaxton/mussel-pollution-project
+docker run --rm -v /$(PWD)/report:/project/report paaaaaxton/mussel_pollution_project
 ```
 
 > Note: Windows git bash requires an extra `/` at the start of the mount path.
