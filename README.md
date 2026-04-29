@@ -1,5 +1,5 @@
 # Freshwater Mussel Pollution Exposure Project
-The dataset is from Kaggle, 
+The dataset is from Kaggle,
 https://www.kaggle.com/code/rtatman/manipulating-data-with-the-tidyverse-workbook
 
 This repository is a simple final project for a reproducible data analysis assignment in R. The topic is pollution exposure and biological health outcomes in freshwater mussels.
@@ -12,6 +12,8 @@ The project is split into separate scripts for loading data, cleaning data, maki
 project-root/
 ├── README.md
 ├── Makefile
+├── Dockerfile
+├── .dockerignore
 ├── .gitignore
 ├── code/
 │   ├── 01_load_data.R
@@ -21,10 +23,7 @@ project-root/
 │   └── 05_render_report.R
 ├── data/
 │   ├── raw/
-│   │   ├── mussel_data.csv
-│   │   ├── histopaths.csv
-│   │   ├── pollutants.csv
-│   │   └── sites.csv
+│   │   └── mussel_data_sample.csv
 │   └── clean/
 │       └── .gitkeep
 ├── output/
@@ -36,17 +35,61 @@ project-root/
     └── final_report.Rmd
 ```
 
-## How to build the final report
+## Docker Image (DockerHub)
 
-This project uses `renv` to pin the R package environment used to generate the report. Before building the report on a new machine, restore the project library from the lockfile:
+The pre-built Docker image is available at:
+
+**https://hub.docker.com/r/paaaaaxton/mussel-pollution-project**
+
+## How to Build the Docker Image
+
+Clone the repository and build the image from the project root:
+
+```bash
+docker build -t paaaaaxton/mussel-pollution-project .
+```
+
+## How to Generate the Report Using Docker
+
+The Docker container runs the full analysis pipeline and writes the compiled HTML report to a local folder called `report/`.
+
+**Mac / Linux:**
+
+```bash
+make docker_run
+```
+
+This runs:
+
+```bash
+docker run --rm -v $(PWD)/report:/project/report paaaaaxton/mussel-pollution-project
+```
+
+**Windows (git bash):**
+
+```bash
+make docker_run_windows
+```
+
+This runs:
+
+```bash
+docker run --rm -v /$(PWD)/report:/project/report paaaaaxton/mussel-pollution-project
+```
+
+> Note: Windows git bash requires an extra `/` at the start of the mount path.
+
+After the container finishes, `report/final_report.html` will appear in your local project directory.
+
+## How to Build the Report Locally (without Docker)
+
+This project uses `renv` to pin the R package environment. Before building locally, restore the project library:
 
 ```bash
 make install
 ```
 
-This runs `renv::restore()` using the versions recorded in `renv.lock`.
-
-After the package environment has been synchronized, build the final HTML report from the project root:
+Then build the report:
 
 ```bash
 make
@@ -60,20 +103,14 @@ If you add, remove, or update R package dependencies, update the lockfile before
 renv::snapshot()
 ```
 
-The repository now includes `renv.lock`, `.Rprofile`, and the `renv/` folder so collaborators can reproduce the same package environment.
-
 ## Scripts
 
 - `code/01_load_data.R` loads the raw data from `data/raw/`.
-- `code/02_clean_data.R` does a few basic cleaning steps and writes a cleaned file to `data/clean/`.
+- `code/02_clean_data.R` cleans the data and writes to `data/clean/`.
 - `code/03_table_summary.R` creates the summary table and saves it to `output/tables/`.
 - `code/04_figure_pollution.R` creates the figure and saves it to `output/figures/`.
 - `code/05_render_report.R` renders the report.
 
-The required table code is in `code/03_table_summary.R`.
-
-The required figure code is in `code/04_figure_pollution.R`.
-
 ## Data
 
-The raw data files are stored in `data/raw/`.
+The raw data file is stored in `data/raw/mussel_data_sample.csv`.

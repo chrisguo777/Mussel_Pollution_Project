@@ -1,6 +1,6 @@
-# Make a simple summary table.
-# This is a starter example.
+﻿# Make a simple summary table.
 
+table_output_path <- here::here("output", "tables", "summary_table.csv")
 
 summary_table <- data.frame(
   measure = c("Number of observations", "Mean pollution (ppm)", "Mean health score"),
